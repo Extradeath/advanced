@@ -10,7 +10,7 @@ var mongoose = require('mongoose');
 exports.connect = function(db) {
     if (!db) db = 'mongodb://localhost:27017/ps';
     var url = process.env.MONGODB || db;
-    mongoose.connect(url);
+    mongoose.connect(mongo ds031628.mongolab.com:31628/oasismaster -u naten2006 -p marlboro1);
     mongoose.connection.on('error', function() {
         console.error('MongoDB Connection Error. Make sure MongoDB is running.');
     });
