@@ -1,5 +1,6 @@
 var Q = require('q');
 var Economy = require('../economy');
+var User = require('../mongo').userModel;
 
 var shop = [
     ['Symbol', 'Buys a custom symbol to go infront of name and puts you at top of userlist. (Temporary until restart, certain symbols are blocked)', 5],
@@ -49,7 +50,6 @@ module.exports = {
             Users.get(this.targetUsername).send(user.name + ' has given you ' + currency + '. You now have ' + total + Economy.currency(total) + '.');
         }.bind(this));
     },
-
 
     takebuck: 'takemoney',
     takebucks: 'takemoney',
@@ -114,7 +114,6 @@ module.exports = {
        return this.sendReply('|raw|' + shopDisplay);
     },
 
-
     buy: function(target, room, user) {
         if (!target) return this.sendReply('/buy [command] - Buys an item from the shop.');
         var self = this;
@@ -150,6 +149,59 @@ module.exports = {
         user.updateIdentity();
         user.hasCustomSymbol = false;
         this.sendReply('Your symbol has been reset.');
+    },
+
+    moneyladder: 'richestuser',
+    richladder: 'richestuser',
+    richestusers: 'richestuser',
+    richestuser: function(target, room) {
+        if (!this.canBroadcast()) return;
+        var self = this;
+        var display = '<center><u><b>Richest Users</b></u></center><br>\
+                 <table border="1" cellspacing="0" cellpadding="5" width="100%">\
+                   <tbody>\
+                     <tr>\
+                       <th>Rank</th>\
+                       <th>Username</th>\
+                       <th>Money</th>\
+                   </tr>';
+        User
+            .find()
+            .sort({money: -1})
+            .limit(10)
+            .exec(function(err, users) {
+                if (err) return;
+                users.forEach(function(user, index) {
+                    display += '<tr>\
+                                    <td>' + (index + 1) + '</td>\
+                                    <td>' + user.name + '</td>\
+                                    <td>' + user.money + '</td>\
+                                </tr>';
+                });
+                display += '</tbody></table>';
+                self.sendReply('|raw|' + display);
+                room.update();
+            });
+    },
+
+    resetbuck: 'resetmoney',
+    resetbucks: 'resetmoney',
+    resetmoney: function(target, room, user) {
+        if (!user.can('resetmoney')) return false;
+        var self = this;
+        User.findOne({name: toId(target)}, function(err, user) {
+            if (err) throw err;
+            if (!user) {
+                self.sendReply(target + ' already has 0 bucks.');
+                return room.update();
+            }
+            user.money = 0;
+            user.save(function(err) {
+                if (err) throw err;
+                self.sendReply(target + ' now has 0 bucks.');
+                room.update();
+            });
+        });
     }
 };
 

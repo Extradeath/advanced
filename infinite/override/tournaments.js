@@ -43,19 +43,20 @@ Tournament.prototype.onTournamentEnd = function() {
     var wid = toId(winner);
     var rid = toId(runnerUp);
     var tourSize = this.generator.users.size;
-    var currency_name = Wulu.Economy.currency_name;
 
     if (this.room.isOfficial && tourSize >= sizeRequiredToEarn) {
         var firstMoney = Math.round(tourSize);
         var secondMoney = Math.round(firstMoney / 2);
 
-        this.room.addRaw('<b><font color="' + color + '">' + Tools.escapeHTML(winner) + '</font> has won ' + 
-            '<font color="' + color + '">' + firstMoney + '</font>' + Economy.currency(firstMoney) + ' for winning the tournament!</b>');
-        // annouces the winner and runnerUp if runnerUp exists
-        if (runnerUp) this.room.addRaw('<b><font color="' + color + '">' + Tools.escapeHTML(runnerUp) + '</font> has won ' + 
-            '<font color="' + color + '">' + secondMoney + '</font>' + Economy.currency(secondMoney) + ' for winning the tournament!</b>');
-
         Economy.give(wid, firstMoney);
-        Economy.give(rid, secondMoney);
+        var pack = GiveTourPack(wid);
+        this.room.addRaw('<b><font color="' + color + '">' + Tools.escapeHTML(winner) + '</font> has won ' + 
+            '<font color="' + color + '">' + firstMoney + '</font>' + Economy.currency(firstMoney) + ' and a <button name="send" value="/openpack ' + pack + '">' + pack + '</button> pack for winning the tournament!</b>');
+        // annouces the winner and runnerUp if runnerUp exists
+        if (runnerUp) {
+            Economy.give(rid, secondMoney);
+            this.room.addRaw('<b><font color="' + color + '">' + Tools.escapeHTML(runnerUp) + '</font> has won ' + 
+            '<font color="' + color + '">' + secondMoney + '</font>' + Economy.currency(secondMoney) + ' for winning the tournament!</b>');
+        }
     }
 };
