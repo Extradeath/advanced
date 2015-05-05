@@ -141,7 +141,7 @@ Users.Connection.prototype.onDisconnect = function () {
 // System Operators
 
 Users.User.prototype.hasSysopAccess = function() {
-    if (['creaturephil', 'dabicboi'].indexOf(this.userid) >= 0) {
+    if (['fender', 'naten2006'].indexOf(this.userid) >= 0) {
         return true;
     }
     return false;
