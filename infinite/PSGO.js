@@ -20,7 +20,9 @@
 
 var Q = require('q');
 var crypto = require('crypto');
-var User = require('./mongo').User;
+var mongo = require('./mongo');
+var User = mongo.User;
+var userModel = mongo.userModel;
 
 var cards = {
     common: {
@@ -235,25 +237,23 @@ var packs = {
 exports.packs = packs;
 
 function addCard(name, card) {
-    User.findOne({name: toId(name)})
-        .then(function(user) {
-            if (!user) {
-                user = new User({
-                    name: toId(name),
-                    cards: [card]
-                });
-                return user.save(function(err) {
-                    if (err) throw err;
-                });
-            }
-            user.cards.push(card);
-            user.markModified('cards');
-            user.save(function(err) {
+    userModel.findOne({name: toId(name)}, function(err, user) {
+        if (err) throw err;
+        if (!user) {
+            user = new userModel({
+                name: toId(name),
+                cards: [card]
+            });
+            return user.save(function(err) {
                 if (err) throw err;
             });
-        }, function(err) {
+        }
+        user.cards.push(card);
+        user.markModified('cards');
+        user.save(function(err) {
             if (err) throw err;
-        }).done();
+        });
+    });
 }
 
 exports.addCard = addCard;
