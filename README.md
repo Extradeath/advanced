@@ -4,8 +4,8 @@
 [![Dependency Status](https://david-dm.org/FakeSloth/Infinite.svg)](https://david-dm.org/FakeSloth/Infinite)
 [![devDependency Status](https://david-dm.org/FakeSloth/Infinite/dev-status.svg)](https://david-dm.org/FakeSloth/Infinite#info=devDependencies)
 
-Oasis's Pokemon Showdown Server
-Desgined by Fake Sloth 
+Oasis's Pokemon Showdown Server.
+Designed by Fake Sloth 
 
 Prerequisites
 -------------
