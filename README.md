@@ -1,10 +1,11 @@
-# [Infinite](http://infinite.psim.us)
+# [Oasis](http://oasis.psim.us)
 
 [![Build Status](https://travis-ci.org/FakeSloth/Infinite.svg)](https://travis-ci.org/FakeSloth/Infinite)
 [![Dependency Status](https://david-dm.org/FakeSloth/Infinite.svg)](https://david-dm.org/FakeSloth/Infinite)
 [![devDependency Status](https://david-dm.org/FakeSloth/Infinite/dev-status.svg)](https://david-dm.org/FakeSloth/Infinite#info=devDependencies)
 
-Infinite's Pokemon Showdown Server
+Oasis's Pokemon Showdown Server
+Desgined by Fake Sloth 
 
 Prerequisites
 -------------
@@ -66,7 +67,7 @@ To make the username look normal when using emoticons, put this in your css:
 Contributing
 ------------
 
-To test infinite's code, use `grunt && mocha`:
+To test oasis's code, use `grunt && mocha`:
 
 ```bash
 $ grunt && mocha
