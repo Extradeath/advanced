@@ -225,7 +225,7 @@ var packs = {
     * 1 iterations of epic card
     * 6 iterations of legendary cards
     */
-    infinite: function() {
+    oasis: function() {
         var pile = base(rare, 1)
                     .concat(base(epic, 1))
                     .concat(base(legendary, 6));
