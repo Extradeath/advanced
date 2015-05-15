@@ -2,7 +2,7 @@
 /logs/*
 /node_modules
 /gulp-cache
-*.mongo
+infinite/mongo.js
 npm-debug.log
 
 # boilerplate #
