@@ -2,8 +2,8 @@
 /logs/*
 /node_modules
 /gulp-cache
-infinite/mongo.js
 npm-debug.log
+.infinite/mongo
 
 # boilerplate #
 ###############
