@@ -1,6 +1,6 @@
 var Q = require('q');
 var mongoose = require('mongoose');
-var secret = fs.readFileSync('secret.txt');
+var secret = fs.readFileSync('../config/secret.txt');
 
 /**
  * Connect to MongoDB Database.
