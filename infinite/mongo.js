@@ -1,5 +1,6 @@
 var Q = require('q');
 var mongoose = require('mongoose');
+var fs = require('fs')
 var secret = fs.readFileSync('../config/secret.txt');
 
 /**
