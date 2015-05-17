@@ -371,9 +371,6 @@ var commands = exports.commands = {
 		if (target.length > 80) return this.sendReply("Error: Room description is too long (must be at most 80 characters).");
 		var normalizedTarget = ' ' + target.toLowerCase().replace('[^a-zA-Z0-9]+', ' ').trim() + ' ';
 
-		if (normalizedTarget.indexOf(' welcome ') >= 0) {
-			return this.sendReply("Error: Room description must not contain the word 'welcome'.");
-		}
 		if (normalizedTarget.slice(0, 9) === ' discuss ') {
 			return this.sendReply("Error: Room description must not start with the word 'discuss'.");
 		}
