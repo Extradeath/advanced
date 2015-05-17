@@ -7,14 +7,14 @@ var path = require('path');
 
 module.exports = {
     hide: function(target, room, user) {
-        if (!this.can('lock')) return false;
+        if (!this.can('lock')) return this.sendReply('/hide - Access denied.');
         user.hiding = true;
         user.updateIdentity();
         this.sendReply('You have hidden your staff symbol.');
     },
 
     show: function(target, room, user) {
-        if (!this.can('lock')) return false;
+        if (!this.can('lock')) return this.sendReply('/show - Access denied.');
         user.hiding = false;
         user.updateIdentity();
         this.sendReply('You have revealed your staff symbol.');
@@ -22,7 +22,7 @@ module.exports = {
 
     masspm: 'pmall',
     pmall: function (target, room, user) {
-        if (!this.can('pmall')) return false;
+        if (!this.can('pmall')) return this.sendReply('/pmall - Access denied.');
         if (!target) return this.sendReply('/pmall [message] - PM all users in the server.');
 
         var pmName = '~Server PM [Do not reply]';
@@ -33,10 +33,11 @@ module.exports = {
         }
     },
 
+    staffpm: 'pmallstaff',
     pmstaff: 'pmallstaff',
     pmallstaff: function (target, room, user) {
+        if (!this.can('pmstaff')) return this.sendReply('/pmstaff - Access denied.');
         if (!target) return this.sendReply('/pmallstaff [message] - Sends a PM to every staff member online.');
-        if (!this.can('pmall')) return false;
 
         var pmName = '~Staff PM [Do not reply]';
 
@@ -49,7 +50,7 @@ module.exports = {
 
     pmroom: 'rmall',
     rmall: function (target, room, user) {
-        if(!this.can('ban')) return false;
+        if(!this.can('ban')) return this.sendReply('/rmall - Access denied.');
         if (!target) return this.sendReply('/rmall [message] - Sends a pm to all users in the room.');
 
         var pmName = '~Room PM [Do not reply]';
@@ -88,7 +89,7 @@ module.exports = {
     },
 
     clearall: function (target, room, user) {
-        if (!this.can('clearall')) return false;
+        if (!this.can('clearall')) return this.sendReply('/clearall - Access denied.');
         if (room.battle) return this.sendReply('You cannot clearall in battle rooms.');
         
         var len = room.log.length;
@@ -110,7 +111,7 @@ module.exports = {
 
     reloadfile: function(target, room, user) {
 
-        if (!this.can('reloadfile')) return false;
+        if (!this.can('reloadfile')) return this.sendReply('/reloadfile - Access denied.');
         if (!target) return this.sendReply('/reload [file directory] - Reload a certain file.');
         this.sendReply('|raw|<b>delete require.cache[require.resolve("' + target + '")]</b>');
         this.parse('/eval delete require.cache[require.resolve("' + target + '")]');
@@ -118,7 +119,7 @@ module.exports = {
         this.parse('/eval require("' + target + '")');
     },
     reload: function (target, room, user) {
-        if (!this.can('reload')) return;
+        if (!this.can('reload')) return this.sendReply('/reload - Access denied.');
 
         this.sendReply('hi');
         try {
