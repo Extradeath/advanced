@@ -39,10 +39,10 @@ Getting Started
 The easiest way to get started is to clone the repository:
 
 ```bash
-$ git clone https://github.com/FakeSloth/Infinite.git
+$ git clone https://github.com/naten2006/Oasis-Master.git
 ```
 
-Infinite requires [MongoDB](http://www.mongodb.com). Open up
+Oasis requires [MongoDB](http://www.mongodb.com). Open up
 another command prompt or terminal:
 
 ```bash
