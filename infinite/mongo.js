@@ -1,7 +1,6 @@
 var Q = require('q');
 var mongoose = require('mongoose');
-var fs = require('fs')
-var secret = fs.readFileSync('../config/secret.txt');
+
 
 /**
  * Connect to MongoDB Database.
@@ -10,7 +9,7 @@ var secret = fs.readFileSync('../config/secret.txt');
  */
 
  exports.connect = function(db) {
-    if (!db) db = secret;
+    if (!db) db = 'mongodb://naten2006:marlboro1@ds031628.mongolab.com:31628/oasismaster';
      var url = process.env.MONGODB || db;
      mongoose.connect(url);
      mongoose.connection.on('error', function() {
