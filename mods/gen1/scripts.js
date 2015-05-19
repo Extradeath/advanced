@@ -53,12 +53,10 @@ exports.BattleScripts = {
 					changed = true;
 					// Recalculate the modified stat
 					if (this.stats[i]) {
-<<<<<<< HEAD
-=======
+
 						var stat = this.template.baseStats[i];
 						stat = Math.floor(Math.floor(2 * stat + this.set.ivs[i] + Math.floor(this.set.evs[i] / 4)) * this.level / 100 + 5);
 						this.modifiedStats[i] = this.stats[i] = Math.floor(stat);
->>>>>>> upstream/master
 						if (delta >= 0) {
 							this.modifyStat(i, [1, 1.5, 2, 2.5, 3, 3.5, 4][delta]);
 						} else {
