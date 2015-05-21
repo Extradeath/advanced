@@ -113,13 +113,7 @@ exports.commands = {
 
 				if (found) {
 					if (!~room.hangman.guessWord.indexOf('_')) {
-						if (this.room.isOfficial) {
-						var pack = GiveTourPack(wid);
-						this.room.add("|raw|<div class=\"infobox\">Congratulations! <b>" + Tools.escapeHTML(user.name) + "</b> has guessed the word, which was: <b>" + room.hangman.word + ".  They have won" ' a <button name="send" value="/openpack ' + pack + '">' + pack + '</button> pack!</b></div>");
-						}
-						else {
-						this.room.add("|raw|<div class=\"infobox\">Congratulations! <b>" + Tools.escapeHTML(user.name) + "</b> has guessed the word, which was: <b>" + room.hangman.word + ".  
-						}
+						room.add("|raw|<div class=\"infobox\">Congratulations! <b>" + Tools.escapeHTML(user.name) + "</b> has guessed the word, which was: <b>" + room.hangman.word + "</b></div>");
 						room.update();
 						delete room.hangman;
 						return;
@@ -209,14 +203,4 @@ exports.commands = {
 	gw: function (target, room, user) {
 		this.parse('/hangman guessword,' + target);
 	}
-        this.room.addRaw('<b><font color="' + color + '">' + Tools.escapeHTML(winner) + '</font> has won ' + 
-            '<font color="' + color + '">' + firstMoney + '</font>' + Economy.currency(firstMoney) + ' and a <button name="send" value="/openpack ' + pack + '">' + pack + '</button> pack for winning the tournament!</b>');
-        
-        // annouces the winner and runnerUp if runnerUp exists
-        if (runnerUp) {
-            Economy.give(rid, secondMoney);
-            this.room.addRaw('<b><font color="' + color + '">' + Tools.escapeHTML(runnerUp) + '</font> has won ' + 
-            '<font color="' + color + '">' + secondMoney + '</font>' + Economy.currency(secondMoney) + ' for winning the tournament!</b>');
-        }
-    }
 };
