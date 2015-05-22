@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Simulator process
  * Pokemon Showdown - http://pokemonshowdown.com/
  *
@@ -12,6 +12,7 @@
 
 require('sugar');
 if (!global.Map) require('es6-shim');
+
 
 global.Config = require('./config/config.js');
 
